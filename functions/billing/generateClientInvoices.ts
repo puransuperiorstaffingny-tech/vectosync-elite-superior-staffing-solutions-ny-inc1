@@ -59,7 +59,7 @@ Deno.serve(async (req) => {
         const key = `${match.pay_code}__${isOT ? 'OT' : 'REG'}`;
         if (!lineMap[key]) {
           lineMap[key] = {
-            description: `${match.pay_code_description || match.pay_code}${isOT ? ' (Overtime)' : ''}`,
+            description: `${match.pay_code_description || match.pay_code}${isOT ? ' (OT)' : ''}`,
             quantity: 0,
             rate,
             amount: 0,

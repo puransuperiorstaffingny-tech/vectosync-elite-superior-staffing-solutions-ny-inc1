@@ -1,16 +1,8 @@
-import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
+import { createClientFromRequest } from 'npm:@base44/sdk@0.8.31';
 
 const fmt = (n: unknown) => {
   if (typeof n === 'number') return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   return String(n);
-};
-
-const fmtDate = (d: string) => {
-  try {
-    return new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  } catch {
-    return d;
-  }
 };
 
 Deno.serve(async (req) => {
@@ -31,22 +23,22 @@ Deno.serve(async (req) => {
 
     const html = `
 <html>
-<body style="font-family: Arial, sans-serif; color: #333;">
+<head><style>
+table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+td { padding: 10px; border-bottom: 1px solid #ddd; }
+.amount { text-align: right; }
+.total { font-weight: bold; border-bottom: 2px solid #000; }
+</style></head>
+<body style="font-family: Arial, sans-serif; color: #333; max-width: 600px;">
   <h2>Your Paystub - ${item.period_start}</h2>
   <p><strong>Employee:</strong> ${item.employee_name}</p>
-  <table style="width: 100%; border-collapse: collapse;">
-    <tr style="border-bottom: 1px solid #ddd;">
-      <td><strong>Gross Pay:</strong></td>
-      <td align="right">$${fmt(item.gross_pay)}</td>
-    </tr>
-    <tr style="border-bottom: 1px solid #ddd;">
-      <td><strong>Total Deductions:</strong></td>
-      <td align="right">$${fmt(item.total_deductions)}</td>
-    </tr>
-    <tr style="border-bottom: 2px solid #000; font-weight: bold;">
-      <td><strong>Net Pay:</strong></td>
-      <td align="right">$${fmt(item.net_pay)}</td>
-    </tr>
+  <p><strong>Period:</strong> ${item.period_start} to ${item.period_end}</p>
+  <table>
+    <tr><td><strong>Gross Pay</strong></td><td class="amount">$${fmt(item.gross_pay)}</td></tr>
+    <tr><td><strong>Federal Tax</strong></td><td class="amount">-$${fmt(item.federal_tax)}</td></tr>
+    <tr><td><strong>State Tax</strong></td><td class="amount">-$${fmt(item.state_tax)}</td></tr>
+    <tr><td><strong>Total Deductions</strong></td><td class="amount">-$${fmt(item.total_deductions)}</td></tr>
+    <tr class="total"><td><strong>Net Pay</strong></td><td class="amount"><strong>$${fmt(item.net_pay)}</strong></td></tr>
   </table>
 </body>
 </html>

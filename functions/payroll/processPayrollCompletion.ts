@@ -19,6 +19,18 @@ Deno.serve(async (req) => {
       completed_at: new Date().toISOString(),
     });
 
+    // Log the action
+    await base44.asServiceRole.entities.PayrollLog.create({
+      employee_id: null,
+      employee_name: 'System',
+      action: 'payroll_run_completed',
+      log_type: 'payroll_completion',
+      amount: 0,
+      details: JSON.stringify({ payroll_run_id }),
+      admin_email: user.email,
+      admin_name: user.full_name || user.email,
+    }).catch(() => {});
+
     console.log(`Payroll run ${payroll_run_id} marked as completed`);
 
     return Response.json({ success: true, payroll_run_id, status: 'completed' });
