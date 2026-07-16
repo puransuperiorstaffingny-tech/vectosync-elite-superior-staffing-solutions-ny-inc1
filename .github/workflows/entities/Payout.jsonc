@@ -1,0 +1,82 @@
+{
+  "name": "Payout",
+  "type": "object",
+  "properties": {
+    "payroll_run_id": {
+      "type": "string",
+      "title": "Payroll Run ID"
+    },
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "employee_email": {
+      "type": "string",
+      "title": "Employee Email"
+    },
+    "bank_account_id": {
+      "type": "string",
+      "title": "Bank Account ID"
+    },
+    "amount": {
+      "type": "number",
+      "title": "Amount ($)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "paid",
+        "failed"
+      ],
+      "default": "pending",
+      "title": "Status"
+    },
+    "provider_transfer_id": {
+      "type": "string",
+      "title": "Provider Transfer ID (Dwolla)"
+    },
+    "failure_reason": {
+      "type": "string",
+      "title": "Failure Reason"
+    }
+  },
+  "required": [
+    "employee_id",
+    "amount"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.employee_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

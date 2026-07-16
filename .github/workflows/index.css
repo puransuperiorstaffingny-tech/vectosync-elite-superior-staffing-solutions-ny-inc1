@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: 'Inter', sans-serif;
+    --font-heading: 'Poppins', sans-serif;
+    --background: 210 40% 97%;
+    --foreground: 215 45% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 45% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 45% 15%;
+    --primary: 190 85% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 70% 30%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 205 35% 90%;
+    --muted-foreground: 215 20% 42%;
+    --accent: 158 64% 48%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 205 35% 86%;
+    --input: 205 35% 92%;
+    --ring: 190 85% 45%;
+    --chart-1: 190 85% 45%;
+    --chart-2: 210 70% 35%;
+    --chart-3: 158 64% 48%;
+    --chart-4: 43 74% 52%;
+    --chart-5: 0 84% 60%;
+    --radius: 0.75rem;
+    --sidebar-background: 217 60% 14%;
+    --sidebar-foreground: 200 30% 92%;
+    --sidebar-primary: 190 85% 50%;
+    --sidebar-primary-foreground: 217 60% 12%;
+    --sidebar-accent: 190 85% 45%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 215 40% 24%;
+    --sidebar-ring: 190 85% 50%;
+  }
+
+  .dark {
+    --background: 217 60% 10%;
+    --foreground: 200 30% 92%;
+    --card: 217 50% 15%;
+    --card-foreground: 200 30% 94%;
+    --popover: 217 50% 14%;
+    --popover-foreground: 200 30% 94%;
+    --primary: 190 90% 50%;
+    --primary-foreground: 217 60% 10%;
+    --secondary: 210 60% 26%;
+    --secondary-foreground: 200 30% 94%;
+    --muted: 217 40% 20%;
+    --muted-foreground: 200 25% 70%;
+    --accent: 158 64% 50%;
+    --accent-foreground: 217 60% 10%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 215 40% 24%;
+    --input: 215 40% 22%;
+    --ring: 190 90% 50%;
+    --chart-1: 190 90% 50%;
+    --chart-2: 210 70% 45%;
+    --chart-3: 158 64% 50%;
+    --chart-4: 43 90% 58%;
+    --chart-5: 200 80% 60%;
+    --sidebar-background: 217 60% 14%;
+    --sidebar-foreground: 200 30% 92%;
+    --sidebar-primary: 190 85% 50%;
+    --sidebar-primary-foreground: 217 60% 12%;
+    --sidebar-accent: 190 85% 45%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 215 40% 24%;
+    --sidebar-ring: 190 85% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+  }
+  html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    overscroll-behavior: none;
+  }
+  body {
+    @apply bg-background text-foreground font-inter;
+    -webkit-overflow-scrolling: touch;
+    padding-top: env(safe-area-inset-top);
+    touch-action: pan-y;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    @apply font-semibold;
+  }
+  button, a, nav {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
+
+@layer utilities {
+  /* Subtle navy→light gradient for internal content areas (Light mode) */
+  .app-content-bg {
+    background-color: hsl(var(--background));
+    background-image:
+      radial-gradient(1200px 600px at 100% -10%, hsla(190, 85%, 45%, 0.10), transparent 60%),
+      radial-gradient(1000px 500px at -10% 110%, hsla(158, 64%, 48%, 0.08), transparent 55%),
+      linear-gradient(180deg, hsla(210, 60%, 96%, 1) 0%, hsla(205, 45%, 93%, 1) 100%);
+  }
+
+  /* Midnight-blue gradient with neon glow for internal content areas (Dark mode) */
+  .dark .app-content-bg {
+    background-color: hsl(var(--background));
+    background-image:
+      radial-gradient(1200px 600px at 100% -10%, hsla(190, 90%, 50%, 0.18), transparent 60%),
+      radial-gradient(1000px 500px at -10% 110%, hsla(158, 64%, 50%, 0.12), transparent 55%),
+      linear-gradient(180deg, hsl(217, 60%, 11%) 0%, hsl(215, 55%, 8%) 100%);
+  }
+
+  /* Cyan glow accent — apply to primary buttons, active cards, icons */
+  .glow-cyan {
+    box-shadow: 0 0 0 1px hsla(190, 85%, 45%, 0.25), 0 4px 20px -2px hsla(190, 85%, 45%, 0.35);
+  }
+  .glow-cyan-soft {
+    box-shadow: 0 2px 16px -4px hsla(190, 85%, 45%, 0.30);
+  }
+
+  /* Glowing gradient text — for page headings/brand words */
+  .text-glow-gradient {
+    background: linear-gradient(90deg, hsl(190, 85%, 42%), hsl(205, 75%, 38%), hsl(158, 64%, 45%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 22px hsla(190, 85%, 50%, 0.25);
+  }
+
+  /* Fixed 7 x 4.5 inch document canvas — for invoice & timesheet templates */
+  .doc-7x45 {
+    width: 7in;
+    min-height: 4.5in;
+    box-sizing: border-box;
+  }
+
+  /* Navy gradient surface — for headers/banners inside pages */
+  .surface-navy-gradient {
+    background-image: linear-gradient(135deg, hsl(217, 60%, 14%) 0%, hsl(210, 70%, 22%) 55%, hsl(190, 70%, 30%) 100%);
+    color: #e6f7ff;
+  }
+
+  /* Manual opt-in neon-green glow (use class="neon-hover") */
+  .neon-hover {
+    transition: box-shadow .18s ease, border-color .18s ease, color .18s ease;
+  }
+  .neon-hover:hover {
+    box-shadow: 0 0 0 1px rgba(57,255,20,0.55), 0 0 16px -2px rgba(57,255,20,0.55) !important;
+    border-color: rgba(57,255,20,0.65) !important;
+  }
+}
+
+/* ── Global neon-green hover effect ──────────────────────────────
+   On hover, interactive elements (buttons, nav links, tabs) and
+   key headings glow neon green. Affects the whole platform. */
+@layer utilities {
+  button:hover,
+  a:hover,
+  [role="tab"]:hover,
+  [role="menuitem"]:hover,
+  .neon-target:hover {
+    box-shadow: 0 0 0 1px rgba(57,255,20,0.45), 0 0 14px -2px rgba(57,255,20,0.50);
+    transition: box-shadow .18s ease;
+  }
+  /* Headings & titles get a neon text glow on hover of their container card */
+  .glow-cyan:hover,
+  .glow-cyan-soft:hover {
+    box-shadow: 0 0 0 1px rgba(57,255,20,0.45), 0 0 18px -2px rgba(57,255,20,0.55) !important;
+  }
+  h1:hover, h2:hover, h3:hover {
+    text-shadow: 0 0 14px rgba(57,255,20,0.55);
+    transition: text-shadow .18s ease;
+  }
+  /* Don't glow links/buttons that are plain text inside paragraphs of license/footer */
+  .no-neon:hover { box-shadow: none !important; text-shadow: none !important; }
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light) {
+    color-scheme: dark;
+  }
+}
+
+/* Print at exactly 7 x 4.5 inches for invoice/timesheet templates */
+@media print {
+  @page {
+    size: 7in 4.5in;
+    margin: 0;
+  }
+  body * { visibility: hidden; }
+  .print-doc, .print-doc * { visibility: visible; }
+  .print-doc {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 7in;
+    height: 4.5in;
+    margin: 0;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  .no-print { display: none !important; }
+}

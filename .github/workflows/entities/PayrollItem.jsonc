@@ -1,0 +1,139 @@
+{
+  "name": "PayrollItem",
+  "type": "object",
+  "properties": {
+    "payroll_run_id": {
+      "type": "string",
+      "title": "Payroll Run ID"
+    },
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "pay_type": {
+      "type": "string",
+      "enum": [
+        "hourly",
+        "salaried"
+      ],
+      "title": "Pay Type"
+    },
+    "regular_hours": {
+      "type": "number",
+      "title": "Regular Hours"
+    },
+    "overtime_hours": {
+      "type": "number",
+      "title": "Overtime Hours"
+    },
+    "hourly_rate": {
+      "type": "number",
+      "title": "Hourly Rate"
+    },
+    "regular_pay": {
+      "type": "number",
+      "title": "Regular Pay"
+    },
+    "overtime_pay": {
+      "type": "number",
+      "title": "Overtime Pay"
+    },
+    "gross_pay": {
+      "type": "number",
+      "title": "Gross Pay"
+    },
+    "federal_tax": {
+      "type": "number",
+      "title": "Federal Tax"
+    },
+    "state_tax": {
+      "type": "number",
+      "title": "State Tax"
+    },
+    "local_tax": {
+      "type": "number",
+      "title": "Local Tax"
+    },
+    "deduction_401k": {
+      "type": "number",
+      "title": "401(k) Deduction"
+    },
+    "deduction_health": {
+      "type": "number",
+      "title": "Health Insurance"
+    },
+    "deduction_other": {
+      "type": "number",
+      "title": "Other Deductions"
+    },
+    "total_deductions": {
+      "type": "number",
+      "title": "Total Deductions"
+    },
+    "net_pay": {
+      "type": "number",
+      "title": "Net Pay"
+    },
+    "period_start": {
+      "type": "string",
+      "format": "date",
+      "title": "Period Start"
+    },
+    "period_end": {
+      "type": "string",
+      "format": "date",
+      "title": "Period End"
+    },
+    "timecard_sent": {
+      "type": "boolean",
+      "title": "Timecard Sent"
+    },
+    "timecard_sent_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Timecard Sent Date"
+    },
+    "employee_email": {
+      "type": "string",
+      "title": "Employee Email"
+    }
+  },
+  "required": [
+    "payroll_run_id",
+    "employee_id",
+    "employee_name"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.employee_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "name": "ContractorPayment",
+  "type": "object",
+  "properties": {
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "amount": {
+      "type": "number",
+      "title": "Amount ($)"
+    },
+    "pay_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Pay Date"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": [
+        "check",
+        "ach",
+        "wire",
+        "cash",
+        "other"
+      ],
+      "title": "Payment Method"
+    },
+    "check_number": {
+      "type": "string",
+      "title": "Check Number"
+    },
+    "invoice_number": {
+      "type": "string",
+      "title": "Invoice Number"
+    },
+    "tax_year": {
+      "type": "number",
+      "title": "Tax Year"
+    }
+  },
+  "required": [
+    "employee_id",
+    "employee_name",
+    "amount",
+    "pay_date"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

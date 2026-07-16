@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="https://media.base44.com/images/public/69d4849d0128b54cf232699f/97c6a62a8_SuperiorStaffingSolutionsNYIncLOGO.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>Superior Staffing Solutions NY Inc — Payroll &amp; Timetracking</title>
+    <meta name="description" content="Superior Staffing Solutions NY Inc — Payroll & Timetracking Portal" />
+    <script>
+      // Save default theme/layout settings so they persist on every load
+      (function() {
+        var existing = localStorage.getItem("timepay_theme");
+        if (!existing) {
+          localStorage.setItem("timepay_theme", JSON.stringify({
+            header_title: "Superior Staffing Solutions NY Inc",
+            header_subtitle: "Payroll & Timetracking",
+            header_bg_color: "#0a1d3b",
+            header_text_color: "#22d3ee"
+          }));
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- License Footer injected on login page before React loads -->
+    <style>
+      #license-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        padding: 8px 16px;
+        font-size: 11px;
+        color: #6b7280;
+        font-family: sans-serif;
+        z-index: 9999;
+        pointer-events: auto;
+      }
+      #license-footer button {
+        background: none;
+        border: none;
+        color: #9ca3af;
+        font-size: 11px;
+        cursor: pointer;
+        text-decoration: underline;
+        font-family: sans-serif;
+      }
+      #license-footer button:hover { color: #6b7280; }
+      #license-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.6);
+        z-index: 99999;
+        align-items: center;
+        justify-content: center;
+      }
+      #license-modal-overlay.open { display: flex; }
+      #license-modal {
+        background: #fff;
+        border-radius: 12px;
+        padding: 32px;
+        max-width: 560px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      }
+      #license-modal h2 { margin: 0 0 4px; font-size: 18px; font-family: sans-serif; }
+      #license-modal p { font-size: 13px; color: #374151; line-height: 1.6; font-family: sans-serif; margin: 8px 0; }
+      #license-modal h3 { font-size: 14px; font-family: sans-serif; margin: 16px 0 4px; }
+      #license-modal-close {
+        display: block;
+        margin: 20px auto 0;
+        padding: 8px 24px;
+        background: #1f2937;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-family: sans-serif;
+      }
+    </style>
+
+    <div id="license-footer">
+      <span>© 2026 Superior Staffing Solutions NY Inc. — Powered by VectoSync Elite+. All rights reserved. Proprietary &amp; Confidential. &nbsp;</span>
+      <button onclick="document.getElementById('license-modal-overlay').classList.add('open')">View License</button>
+    </div>
+
+    <div id="license-modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+      <div id="license-modal">
+        <h2>Proprietary Software License</h2>
+        <p style="color:#6b7280;font-size:12px;">PATSL Developer LLC</p>
+        <p style="color:#374151;font-size:13px;"><strong>Copyright © 2026 PATSL Developer LLC — All Rights Reserved.</strong></p>
+        <p>This software, its editions, and its source code are the exclusive property of PATSL Developer LLC ("Company"). This software is proprietary and confidential.</p>
+        <h3>1. Scope of License and Tiers</h3>
+        <p>This license governs your use of the VectoSync™ software suite and all associated product tiers, versions, and editions developed by the Company, including but not limited to VectoSync Builder, VectoSync Build+, VectoSync Build IQ+, VectoSync Pro, and VectoSync Elite (collectively referred to as the "Software").</p>
+        <h3>2. Restrictions</h3>
+        <p>Unauthorized copying, modification, reverse engineering, distribution, sublicensing, or use of this Software, in whole or in part, is strictly prohibited without the express prior written permission of the Company.</p>
+        <h3>3. No Warranty</h3>
+        <p>This Software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+        <h3>4. Limitation of Liability</h3>
+        <p>In no event shall the Company be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Software or the use or other dealings in the Software.</p>
+        <h3>5. Confidentiality</h3>
+        <p>This Software contains trade secrets and proprietary information belonging to the Company. You agree to maintain the strict confidentiality of this Software and its source code and not to disclose or distribute it to any third party without the prior written consent of the Company.</p>
+        <h3>6. Governing Law</h3>
+        <p>This license shall be governed by and construed in accordance with the laws of the State of New York, United States of America, without regard to its conflict of law provisions.</p>
+        <h3>Licensing Inquiries:</h3>
+        <p><strong>PATSL Developer LLC</strong></p>
+        <button id="license-modal-close" onclick="document.getElementById('license-modal-overlay').classList.remove('open')">Close</button>
+      </div>
+    </div>
+
+    <script>
+      // Hide the static license footer once React has mounted (it has its own footer)
+      document.addEventListener('DOMContentLoaded', function() {
+        var observer = new MutationObserver(function() {
+          var root = document.getElementById('root');
+          if (root && root.children.length > 0) {
+            var footer = document.getElementById('license-footer');
+            if (footer) footer.style.display = 'none';
+            observer.disconnect();
+          }
+        });
+        observer.observe(document.getElementById('root'), { childList: true });
+      });
+    </script>
+  </body>
+</html>

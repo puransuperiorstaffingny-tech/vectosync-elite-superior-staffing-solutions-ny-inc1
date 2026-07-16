@@ -1,0 +1,93 @@
+{
+  "name": "PayrollRun",
+  "type": "object",
+  "properties": {
+    "period_start": {
+      "type": "string",
+      "format": "date",
+      "title": "Period Start"
+    },
+    "period_end": {
+      "type": "string",
+      "format": "date",
+      "title": "Period End"
+    },
+    "run_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Run Date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "processing",
+        "completed",
+        "cancelled"
+      ],
+      "title": "Status",
+      "default": "draft"
+    },
+    "total_gross": {
+      "type": "number",
+      "title": "Total Gross Pay"
+    },
+    "total_deductions": {
+      "type": "number",
+      "title": "Total Deductions"
+    },
+    "total_net": {
+      "type": "number",
+      "title": "Total Net Pay"
+    },
+    "total_overtime_pay": {
+      "type": "number",
+      "title": "Total Overtime Pay"
+    },
+    "employee_count": {
+      "type": "number",
+      "title": "Employee Count"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "pay_frequency": {
+      "type": "string",
+      "enum": [
+        "weekly",
+        "biweekly",
+        "semimonthly",
+        "monthly"
+      ],
+      "title": "Pay Frequency"
+    }
+  },
+  "required": [
+    "period_start",
+    "period_end",
+    "status"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

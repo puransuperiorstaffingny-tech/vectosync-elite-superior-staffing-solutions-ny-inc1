@@ -1,0 +1,82 @@
+{
+  "name": "RapidExportLog",
+  "type": "object",
+  "properties": {
+    "file_name": {
+      "type": "string",
+      "title": "File Name"
+    },
+    "export_type": {
+      "type": "string",
+      "enum": [
+        "encrypted_csv",
+        "plain_csv",
+        "api_enroll"
+      ],
+      "title": "Export Type"
+    },
+    "record_count": {
+      "type": "number",
+      "title": "Records Included",
+      "default": 0
+    },
+    "ready_count": {
+      "type": "number",
+      "title": "Records Ready (valid)",
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "generated",
+        "uploaded",
+        "failed",
+        "needs_attention"
+      ],
+      "default": "generated",
+      "title": "Status"
+    },
+    "encrypted": {
+      "type": "boolean",
+      "title": "PGP Encrypted",
+      "default": false
+    },
+    "pgp_key_label": {
+      "type": "string",
+      "title": "PGP Key Used"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "performed_by": {
+      "type": "string",
+      "title": "Performed By (Email)"
+    }
+  },
+  "required": [
+    "export_type"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

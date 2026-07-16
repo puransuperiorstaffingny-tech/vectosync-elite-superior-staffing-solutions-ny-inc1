@@ -1,0 +1,72 @@
+{
+  "name": "IntegrationLog",
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": [
+        "enabled",
+        "disabled",
+        "configured",
+        "updated"
+      ],
+      "title": "Action"
+    },
+    "integration_name": {
+      "type": "string",
+      "title": "Integration / Service Name"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category"
+    },
+    "admin_email": {
+      "type": "string",
+      "title": "Performed By (Admin Email)"
+    },
+    "admin_name": {
+      "type": "string",
+      "title": "Performed By (Name)"
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "profile",
+        "workspace",
+        "system"
+      ],
+      "default": "profile",
+      "title": "Scope"
+    },
+    "details": {
+      "type": "string",
+      "title": "Details"
+    }
+  },
+  "required": [
+    "action",
+    "integration_name"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "name": "RapidFunding",
+  "type": "object",
+  "properties": {
+    "transfer_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Transfer Date"
+    },
+    "amount": {
+      "type": "number",
+      "title": "Amount Sent to Rapid ($)"
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "ach",
+        "wire",
+        "rapid_debit",
+        "other"
+      ],
+      "default": "wire",
+      "title": "Method"
+    },
+    "reference_number": {
+      "type": "string",
+      "title": "Reference / Confirmation #"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "sent",
+        "confirmed",
+        "failed"
+      ],
+      "default": "sent",
+      "title": "Status"
+    },
+    "payroll_run_id": {
+      "type": "string",
+      "title": "Linked Payroll Run ID"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "performed_by": {
+      "type": "string",
+      "title": "Performed By (Email)"
+    }
+  },
+  "required": [
+    "amount"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

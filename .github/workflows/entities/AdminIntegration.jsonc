@@ -1,0 +1,85 @@
+{
+  "name": "AdminIntegration",
+  "type": "object",
+  "properties": {
+    "admin_email": {
+      "type": "string",
+      "title": "Admin Email (owner)"
+    },
+    "integration_key": {
+      "type": "string",
+      "title": "Integration Key"
+    },
+    "integration_name": {
+      "type": "string",
+      "title": "Integration Name"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category"
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "title": "Enabled"
+    },
+    "config": {
+      "type": "string",
+      "title": "Config (JSON)"
+    }
+  },
+  "required": [
+    "admin_email",
+    "integration_key"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "data.admin_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "data.admin_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.admin_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.admin_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

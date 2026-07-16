@@ -1,0 +1,272 @@
+{
+  "name": "Employee",
+  "type": "object",
+  "properties": {
+    "first_name": {
+      "type": "string",
+      "title": "First Name"
+    },
+    "last_name": {
+      "type": "string",
+      "title": "Last Name"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Email"
+    },
+    "phone": {
+      "type": "string",
+      "title": "Phone"
+    },
+    "dob": {
+      "type": "string",
+      "format": "date",
+      "title": "Date of Birth"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "sub_department": {
+      "type": "string",
+      "title": "Sub-Department"
+    },
+    "location": {
+      "type": "string",
+      "title": "Location"
+    },
+    "position": {
+      "type": "string",
+      "title": "Position/Title"
+    },
+    "address_line1": {
+      "type": "string",
+      "title": "Address Line 1"
+    },
+    "address_line2": {
+      "type": "string",
+      "title": "Address Line 2"
+    },
+    "city": {
+      "type": "string",
+      "title": "City"
+    },
+    "state": {
+      "type": "string",
+      "title": "State"
+    },
+    "zip_code": {
+      "type": "string",
+      "title": "Zip Code"
+    },
+    "pay_type": {
+      "type": "string",
+      "enum": [
+        "hourly",
+        "salaried"
+      ],
+      "title": "Pay Type"
+    },
+    "hourly_rate": {
+      "type": "number",
+      "title": "Hourly Rate ($)"
+    },
+    "annual_salary": {
+      "type": "number",
+      "title": "Annual Salary ($)"
+    },
+    "overtime_eligible": {
+      "type": "boolean",
+      "title": "Overtime Eligible"
+    },
+    "overtime_rate_multiplier": {
+      "type": "number",
+      "title": "Overtime Rate Multiplier",
+      "default": 1.5
+    },
+    "weekly_hours_threshold": {
+      "type": "number",
+      "title": "Weekly Hours Before OT",
+      "default": 40
+    },
+    "tax_federal_pct": {
+      "type": "number",
+      "title": "Federal Tax %"
+    },
+    "tax_state_pct": {
+      "type": "number",
+      "title": "State Tax %"
+    },
+    "tax_local_pct": {
+      "type": "number",
+      "title": "Local Tax %"
+    },
+    "deduction_401k_pct": {
+      "type": "number",
+      "title": "401(k) Deduction %"
+    },
+    "deduction_health": {
+      "type": "number",
+      "title": "Health Insurance Deduction ($)"
+    },
+    "deduction_other": {
+      "type": "number",
+      "title": "Other Deductions ($)"
+    },
+    "hire_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Hire Date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "terminated"
+      ],
+      "title": "Status",
+      "default": "active"
+    },
+    "employee_id_number": {
+      "type": "string",
+      "title": "Employee ID"
+    },
+    "geofence_enabled": {
+      "type": "boolean",
+      "title": "Geofence Enabled"
+    },
+    "avatar_url": {
+      "type": "string",
+      "title": "Avatar URL"
+    },
+    "bank_account_name": {
+      "type": "string",
+      "title": "Account Holder Name"
+    },
+    "bank_name": {
+      "type": "string",
+      "title": "Bank Name"
+    },
+    "bank_account_number": {
+      "type": "string",
+      "title": "Account Number (last 4 shown)"
+    },
+    "bank_routing_number": {
+      "type": "string",
+      "title": "Routing Number"
+    },
+    "bank_account_type": {
+      "type": "string",
+      "enum": [
+        "checking",
+        "savings"
+      ],
+      "title": "Account Type"
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": [
+        "direct_deposit",
+        "paycard",
+        "check"
+      ],
+      "title": "Payroll Payment Method"
+    },
+    "stripe_account_id": {
+      "type": "string",
+      "title": "Stripe Connected Account ID (acct_...)"
+    },
+    "dwolla_customer_url": {
+      "type": "string",
+      "title": "Dwolla Customer URL"
+    },
+    "track_1099": {
+      "type": "boolean",
+      "title": "Track as 1099 Contractor"
+    },
+    "business_name": {
+      "type": "string",
+      "title": "Business Name"
+    },
+    "ein": {
+      "type": "string",
+      "title": "EIN (Employer ID Number)"
+    },
+    "ssn_last4": {
+      "type": "string",
+      "title": "SSN Last 4 Digits"
+    },
+    "ssn_full": {
+      "type": "string",
+      "title": "Full SSN (9 digits, for Rapid Pay card issuance)"
+    },
+    "paycard_id": {
+      "type": "string",
+      "title": "Rapid Paycard ID (printed on instant-issue card)"
+    },
+    "invite_status": {
+      "type": "string",
+      "enum": [
+        "sent",
+        "pending",
+        ""
+      ],
+      "title": "Portal Invite Status"
+    },
+    "invite_scheduled_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Invite Scheduled Date"
+    },
+    "invite_sent_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Invite Sent Date"
+    }
+  },
+  "required": [
+    "first_name",
+    "last_name",
+    "email",
+    "pay_type",
+    "status"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "name": "TrainingModule",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Module Title"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "safety",
+        "onboarding",
+        "compliance",
+        "skills",
+        "other"
+      ],
+      "title": "Category",
+      "default": "onboarding"
+    },
+    "content_type": {
+      "type": "string",
+      "enum": [
+        "video",
+        "pdf",
+        "document",
+        "link"
+      ],
+      "title": "Content Type",
+      "default": "video"
+    },
+    "content_url": {
+      "type": "string",
+      "title": "Content URL (video link or PDF URL)"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "title": "Duration (minutes)"
+    },
+    "is_required": {
+      "type": "boolean",
+      "title": "Required Training",
+      "default": true
+    },
+    "is_active": {
+      "type": "boolean",
+      "title": "Active",
+      "default": true
+    },
+    "assigned_to_all": {
+      "type": "boolean",
+      "title": "Assigned to All Employees",
+      "default": true
+    },
+    "assigned_employee_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Assigned Employee IDs"
+    },
+    "due_days_after_hire": {
+      "type": "number",
+      "title": "Due (days after hire date)"
+    },
+    "order": {
+      "type": "number",
+      "title": "Display Order"
+    }
+  },
+  "required": [
+    "title",
+    "category"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": true,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

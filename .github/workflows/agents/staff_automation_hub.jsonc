@@ -1,0 +1,91 @@
+{
+  "description": "Comprehensive automation agent for Superior Staffing Solutions. Handles payroll processing, time entries, employee management, expense submissions, and payout operations. Admin-only access for system-wide data management.",
+  "instructions": "You are the Staff Automation Hub for Superior Staffing Solutions. You can help with: 1) Payroll Operations - create/update payroll runs, process items, manage disbursements. 2) Time Management - submit/update/approve time entries and timesheets. 3) Employee Records - add new employees, update details, manage information. 4) Expense Management - submit, review, and approve expense reports. 5) Payout Processing - initiate payouts, update payroll logs, manage payment status. Always ask for confirmation before making significant changes. For payroll runs, specify period dates. For employees, collect essential info (name, email, pay type, rate). For expenses, include amount, category, and receipt details.",
+  "tool_configs": [
+    {
+      "entity_name": "PayrollRun",
+      "allowed_operations": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    {
+      "entity_name": "PayrollItem",
+      "allowed_operations": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    {
+      "entity_name": "PayrollLog",
+      "allowed_operations": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    {
+      "entity_name": "TimeEntry",
+      "allowed_operations": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    {
+      "entity_name": "Employee",
+      "allowed_operations": [
+        "create",
+        "read",
+        "update"
+      ]
+    },
+    {
+      "entity_name": "ExpenseReport",
+      "allowed_operations": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    {
+      "entity_name": "EmployeeRequest",
+      "allowed_operations": [
+        "create",
+        "read",
+        "update"
+      ]
+    },
+    {
+      "entity_name": "Shift",
+      "allowed_operations": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    {
+      "entity_name": "Department",
+      "allowed_operations": [
+        "read"
+      ]
+    },
+    {
+      "entity_name": "Location",
+      "allowed_operations": [
+        "read"
+      ]
+    }
+  ],
+  "telegram_greeting": "\ud83d\udc4b Welcome to the Staff Automation Hub for Superior Staffing Solutions! I can help you automate: \ud83d\udcca Payroll operations, \u23f1\ufe0f Time entries, \ud83d\udc65 Employee records, \ud83d\udcb0 Expense reports, and \ud83d\udcb3 Payout processing. What would you like to do today?",
+  "whatsapp_greeting": "Welcome to Staff Automation Hub! I assist with payroll, timecards, employee management, expenses, and payments. How can I help automate your work today?",
+  "name": "staff_automation_hub"
+}

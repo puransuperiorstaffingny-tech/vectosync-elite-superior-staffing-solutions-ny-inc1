@@ -1,0 +1,102 @@
+{
+  "name": "Client",
+  "type": "object",
+  "properties": {
+    "company_name": {
+      "type": "string",
+      "title": "Company / Client Name"
+    },
+    "contact_name": {
+      "type": "string",
+      "title": "Primary Contact Name"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Email"
+    },
+    "phone": {
+      "type": "string",
+      "title": "Phone"
+    },
+    "client_code": {
+      "type": "string",
+      "title": "Client Code / ID"
+    },
+    "address_line1": {
+      "type": "string",
+      "title": "Address Line 1"
+    },
+    "address_line2": {
+      "type": "string",
+      "title": "Address Line 2"
+    },
+    "city": {
+      "type": "string",
+      "title": "City"
+    },
+    "state": {
+      "type": "string",
+      "title": "State"
+    },
+    "zip_code": {
+      "type": "string",
+      "title": "Zip Code"
+    },
+    "billing_rate": {
+      "type": "number",
+      "title": "Default Billing Rate ($/hr)"
+    },
+    "payment_terms": {
+      "type": "string",
+      "enum": [
+        "due_on_receipt",
+        "net_15",
+        "net_30",
+        "net_45",
+        "net_60"
+      ],
+      "default": "net_30",
+      "title": "Payment Terms"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "prospect"
+      ],
+      "default": "active",
+      "title": "Status"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "company_name"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

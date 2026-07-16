@@ -1,0 +1,91 @@
+{
+  "name": "ImportLog",
+  "type": "object",
+  "properties": {
+    "import_type": {
+      "type": "string",
+      "enum": [
+        "employees",
+        "payroll",
+        "customers",
+        "pay_codes",
+        "timecards",
+        "vendors"
+      ],
+      "title": "Import Type"
+    },
+    "source": {
+      "type": "string",
+      "title": "Source (e.g. QuickBooks, CSV, Excel)"
+    },
+    "file_name": {
+      "type": "string",
+      "title": "File Name"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "success",
+        "partial",
+        "failed"
+      ],
+      "default": "success",
+      "title": "Status"
+    },
+    "records_created": {
+      "type": "number",
+      "title": "Records Created",
+      "default": 0
+    },
+    "records_updated": {
+      "type": "number",
+      "title": "Records Updated",
+      "default": 0
+    },
+    "records_skipped": {
+      "type": "number",
+      "title": "Records Skipped",
+      "default": 0
+    },
+    "imported_by": {
+      "type": "string",
+      "title": "Imported By (Email)"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "import_type"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "data.imported_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "name": "AdminAssignment",
+  "type": "object",
+  "properties": {
+    "admin_email": {
+      "type": "string",
+      "format": "email",
+      "title": "Admin Email"
+    },
+    "admin_name": {
+      "type": "string",
+      "title": "Admin Name"
+    },
+    "location": {
+      "type": "string",
+      "title": "Assigned Location"
+    },
+    "department": {
+      "type": "string",
+      "title": "Assigned Department"
+    },
+    "allowed_modules": {
+      "type": "array",
+      "title": "Allowed Modules",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    }
+  },
+  "required": [
+    "admin_email"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
