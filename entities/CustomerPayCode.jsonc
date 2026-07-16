@@ -1,0 +1,81 @@
+{
+  "name": "CustomerPayCode",
+  "type": "object",
+  "properties": {
+    "customer_name": {
+      "type": "string",
+      "title": "Customer / Client Name"
+    },
+    "customer_code": {
+      "type": "string",
+      "title": "Customer Code / ID"
+    },
+    "pay_code": {
+      "type": "string",
+      "title": "Pay Code"
+    },
+    "pay_code_description": {
+      "type": "string",
+      "title": "Pay Code Description"
+    },
+    "billing_rate": {
+      "type": "number",
+      "title": "Billing Rate ($/hr)"
+    },
+    "employee_pay_rate": {
+      "type": "number",
+      "title": "Employee Pay Rate ($/hr)"
+    },
+    "markup_pct": {
+      "type": "number",
+      "title": "Markup %"
+    },
+    "overtime_billing_rate": {
+      "type": "number",
+      "title": "OT Billing Rate ($/hr)"
+    },
+    "position": {
+      "type": "string",
+      "title": "Position / Job Type"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "is_active": {
+      "type": "boolean",
+      "title": "Active",
+      "default": true
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "customer_name",
+    "pay_code"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

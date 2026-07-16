@@ -1,0 +1,47 @@
+{
+  "name": "AdminMessage",
+  "type": "object",
+  "properties": {
+    "sender_name": {
+      "type": "string",
+      "title": "Sender Name"
+    },
+    "sender_email": {
+      "type": "string",
+      "title": "Sender Email"
+    },
+    "message": {
+      "type": "string",
+      "title": "Message"
+    },
+    "file_url": {
+      "type": "string",
+      "title": "File Attachment URL"
+    }
+  },
+  "required": [
+    "sender_email"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

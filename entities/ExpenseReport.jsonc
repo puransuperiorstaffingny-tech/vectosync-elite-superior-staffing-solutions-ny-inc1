@@ -1,0 +1,150 @@
+{
+  "name": "ExpenseReport",
+  "type": "object",
+  "properties": {
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "employee_email": {
+      "type": "string",
+      "title": "Employee Email"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Expense Date"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "travel",
+        "transportation",
+        "petty_cash",
+        "meals",
+        "supplies",
+        "equipment",
+        "lodging",
+        "fuel",
+        "parking",
+        "tolls",
+        "training",
+        "utilities",
+        "postage",
+        "other"
+      ],
+      "title": "Category"
+    },
+    "amount": {
+      "type": "number",
+      "title": "Amount ($)"
+    },
+    "receipt_url": {
+      "type": "string",
+      "title": "Receipt URL"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "submitted",
+        "approved",
+        "rejected"
+      ],
+      "default": "draft",
+      "title": "Status"
+    },
+    "project": {
+      "type": "string",
+      "title": "Project / Job"
+    },
+    "billable": {
+      "type": "boolean",
+      "title": "Billable to Client",
+      "default": false
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "title": "Reviewed By"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Reviewed At"
+    },
+    "manager_notes": {
+      "type": "string",
+      "title": "Manager Notes"
+    }
+  },
+  "required": [
+    "employee_id",
+    "employee_name",
+    "description",
+    "date",
+    "category",
+    "amount"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "data.employee_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "data.employee_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.employee_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.employee_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

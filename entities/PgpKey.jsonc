@@ -1,0 +1,57 @@
+{
+  "name": "PgpKey",
+  "type": "object",
+  "properties": {
+    "label": {
+      "type": "string",
+      "title": "Key Label / Name"
+    },
+    "public_key": {
+      "type": "string",
+      "title": "PGP Public Key (ASCII-armored)"
+    },
+    "fingerprint": {
+      "type": "string",
+      "title": "Fingerprint"
+    },
+    "key_user_ids": {
+      "type": "string",
+      "title": "Key User IDs"
+    },
+    "is_active": {
+      "type": "boolean",
+      "title": "Active Key",
+      "default": false
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "label",
+    "public_key"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

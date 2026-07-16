@@ -1,0 +1,131 @@
+{
+  "name": "HistoricalPayrollItem",
+  "type": "object",
+  "properties": {
+    "historical_payroll_id": {
+      "type": "string",
+      "title": "Historical Payroll ID"
+    },
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "pay_type": {
+      "type": "string",
+      "title": "Pay Type"
+    },
+    "period_start": {
+      "type": "string",
+      "format": "date",
+      "title": "Period Start"
+    },
+    "period_end": {
+      "type": "string",
+      "format": "date",
+      "title": "Period End"
+    },
+    "pay_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Pay Date"
+    },
+    "source": {
+      "type": "string",
+      "title": "Source"
+    },
+    "matched": {
+      "type": "boolean",
+      "title": "Matched to Employee Record"
+    },
+    "regular_hours": {
+      "type": "number",
+      "title": "Regular Hours"
+    },
+    "overtime_hours": {
+      "type": "number",
+      "title": "Overtime Hours"
+    },
+    "regular_pay": {
+      "type": "number",
+      "title": "Regular Pay"
+    },
+    "overtime_pay": {
+      "type": "number",
+      "title": "Overtime Pay"
+    },
+    "gross_pay": {
+      "type": "number",
+      "title": "Gross Pay"
+    },
+    "federal_tax": {
+      "type": "number",
+      "title": "Federal Tax"
+    },
+    "state_tax": {
+      "type": "number",
+      "title": "State Tax"
+    },
+    "local_tax": {
+      "type": "number",
+      "title": "Local Tax"
+    },
+    "deduction_401k": {
+      "type": "number",
+      "title": "401(k) Deduction"
+    },
+    "deduction_health": {
+      "type": "number",
+      "title": "Health Insurance"
+    },
+    "deduction_other": {
+      "type": "number",
+      "title": "Other Deductions"
+    },
+    "total_deductions": {
+      "type": "number",
+      "title": "Total Deductions"
+    },
+    "net_pay": {
+      "type": "number",
+      "title": "Net Pay"
+    }
+  },
+  "required": [
+    "historical_payroll_id",
+    "employee_id",
+    "employee_name"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.employee_id": "{{user.data.employee_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

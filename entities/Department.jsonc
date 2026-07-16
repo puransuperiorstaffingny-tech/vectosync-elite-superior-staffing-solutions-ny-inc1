@@ -1,0 +1,75 @@
+{
+  "name": "Department",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Department Name"
+    },
+    "code": {
+      "type": "string",
+      "title": "Department Code"
+    },
+    "sub_department": {
+      "type": "string",
+      "title": "Sub-Department"
+    },
+    "location_name": {
+      "type": "string",
+      "title": "Location"
+    },
+    "manager_name": {
+      "type": "string",
+      "title": "Manager Name"
+    },
+    "manager_email": {
+      "type": "string",
+      "format": "email",
+      "title": "Manager Email"
+    },
+    "is_active": {
+      "type": "boolean",
+      "title": "Active",
+      "default": true
+    },
+    "overtime_threshold_hours": {
+      "type": "number",
+      "title": "Overtime Threshold (hours per week)",
+      "default": 40
+    },
+    "overtime_multiplier": {
+      "type": "number",
+      "title": "Overtime Rate Multiplier",
+      "default": 1.5
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

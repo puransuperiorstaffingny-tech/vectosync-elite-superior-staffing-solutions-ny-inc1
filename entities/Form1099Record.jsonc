@@ -1,0 +1,185 @@
+{
+  "name": "Form1099Record",
+  "type": "object",
+  "properties": {
+    "form_type": {
+      "type": "string",
+      "enum": [
+        "1099-NEC",
+        "1099-MISC"
+      ],
+      "title": "Form Type"
+    },
+    "tax_year": {
+      "type": "number",
+      "title": "Tax Year"
+    },
+    "employee_id": {
+      "type": "string",
+      "title": "Employee/Contractor ID"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee/Contractor Name"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "finalized",
+        "filed",
+        "corrected"
+      ],
+      "default": "draft",
+      "title": "Status"
+    },
+    "payer_name": {
+      "type": "string",
+      "title": "Payer Name"
+    },
+    "payer_address": {
+      "type": "string",
+      "title": "Payer Address"
+    },
+    "payer_city_state_zip": {
+      "type": "string",
+      "title": "Payer City, State, ZIP"
+    },
+    "payer_tin": {
+      "type": "string",
+      "title": "Payer TIN / EIN"
+    },
+    "payer_phone": {
+      "type": "string",
+      "title": "Payer Phone"
+    },
+    "recipient_name": {
+      "type": "string",
+      "title": "Recipient Name"
+    },
+    "recipient_business_name": {
+      "type": "string",
+      "title": "Recipient Business Name"
+    },
+    "recipient_tin": {
+      "type": "string",
+      "title": "Recipient TIN / SSN"
+    },
+    "recipient_address": {
+      "type": "string",
+      "title": "Recipient Address"
+    },
+    "recipient_city_state_zip": {
+      "type": "string",
+      "title": "Recipient City, State, ZIP"
+    },
+    "nec_box1_nonemployee_comp": {
+      "type": "number",
+      "title": "NEC Box 1 \u2014 Nonemployee Compensation"
+    },
+    "nec_box4_federal_tax_withheld": {
+      "type": "number",
+      "title": "NEC Box 4 \u2014 Federal Tax Withheld"
+    },
+    "nec_box5_state_tax_withheld": {
+      "type": "number",
+      "title": "NEC Box 5 \u2014 State Tax Withheld"
+    },
+    "nec_box6_state": {
+      "type": "string",
+      "title": "NEC Box 6 \u2014 State"
+    },
+    "nec_box7_state_income": {
+      "type": "number",
+      "title": "NEC Box 7 \u2014 State Income"
+    },
+    "misc_box1_rents": {
+      "type": "number",
+      "title": "MISC Box 1 \u2014 Rents"
+    },
+    "misc_box2_royalties": {
+      "type": "number",
+      "title": "MISC Box 2 \u2014 Royalties"
+    },
+    "misc_box3_other_income": {
+      "type": "number",
+      "title": "MISC Box 3 \u2014 Other Income"
+    },
+    "misc_box4_federal_tax_withheld": {
+      "type": "number",
+      "title": "MISC Box 4 \u2014 Federal Tax Withheld"
+    },
+    "misc_box6_medical": {
+      "type": "number",
+      "title": "MISC Box 6 \u2014 Medical Payments"
+    },
+    "misc_box7_nonemployee_comp": {
+      "type": "number",
+      "title": "MISC Box 7 \u2014 Nonemployee Comp"
+    },
+    "misc_box16_state_tax_withheld": {
+      "type": "number",
+      "title": "MISC Box 16 \u2014 State Tax Withheld"
+    },
+    "misc_box17_state": {
+      "type": "string",
+      "title": "MISC Box 17 \u2014 State"
+    },
+    "misc_box18_state_income": {
+      "type": "number",
+      "title": "MISC Box 18 \u2014 State Income"
+    },
+    "total_payments": {
+      "type": "number",
+      "title": "Total Payments (from ContractorPayments)"
+    },
+    "filed_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Filed Date"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "form_type",
+    "tax_year",
+    "employee_name"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.recipient_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

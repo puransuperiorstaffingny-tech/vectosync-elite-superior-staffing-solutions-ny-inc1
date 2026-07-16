@@ -1,0 +1,122 @@
+{
+  "name": "TimeEntry",
+  "type": "object",
+  "properties": {
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Date"
+    },
+    "clock_in": {
+      "type": "string",
+      "title": "Clock In Time"
+    },
+    "clock_out": {
+      "type": "string",
+      "title": "Clock Out Time"
+    },
+    "break_minutes": {
+      "type": "number",
+      "title": "Break (minutes)",
+      "default": 0
+    },
+    "total_hours": {
+      "type": "number",
+      "title": "Total Hours"
+    },
+    "entry_method": {
+      "type": "string",
+      "enum": [
+        "manual",
+        "clock",
+        "geofence",
+        "import"
+      ],
+      "title": "Entry Method"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected"
+      ],
+      "title": "Status",
+      "default": "pending"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "location_lat": {
+      "type": "number",
+      "title": "Latitude"
+    },
+    "location_lng": {
+      "type": "number",
+      "title": "Longitude"
+    },
+    "location_name": {
+      "type": "string",
+      "title": "Location Name"
+    },
+    "is_overtime": {
+      "type": "boolean",
+      "title": "Is Overtime"
+    },
+    "week_start": {
+      "type": "string",
+      "format": "date",
+      "title": "Week Start Date"
+    }
+  },
+  "required": [
+    "employee_id",
+    "employee_name",
+    "date"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "data.employee_id": "{{user.data.employee_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "data.employee_id": "{{user.data.employee_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

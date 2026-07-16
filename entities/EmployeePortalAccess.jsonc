@@ -1,0 +1,78 @@
+{
+  "name": "EmployeePortalAccess",
+  "type": "object",
+  "properties": {
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID"
+    },
+    "employee_email": {
+      "type": "string",
+      "format": "email",
+      "title": "Employee Email"
+    },
+    "last_login": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Login"
+    },
+    "paycard_token": {
+      "type": "string",
+      "title": "Paycard Token (Encrypted)"
+    },
+    "paycard_last_four": {
+      "type": "string",
+      "title": "Paycard Last 4"
+    },
+    "direct_deposit_verified": {
+      "type": "boolean",
+      "title": "Direct Deposit Verified",
+      "default": false
+    },
+    "tax_documents_accepted": {
+      "type": "boolean",
+      "title": "Tax Documents Accepted",
+      "default": false
+    }
+  },
+  "required": [
+    "employee_id",
+    "employee_email"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.employee_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.employee_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

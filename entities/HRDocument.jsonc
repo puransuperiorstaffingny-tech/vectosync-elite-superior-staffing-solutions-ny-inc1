@@ -1,0 +1,95 @@
+{
+  "name": "HRDocument",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Document Title"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "onboarding",
+        "policy",
+        "agreement",
+        "tax_form",
+        "other"
+      ],
+      "title": "Category"
+    },
+    "file_url": {
+      "type": "string",
+      "title": "File URL"
+    },
+    "content_html": {
+      "type": "string",
+      "title": "Document Content (HTML)"
+    },
+    "requires_signature": {
+      "type": "boolean",
+      "title": "Requires Signature",
+      "default": false
+    },
+    "is_active": {
+      "type": "boolean",
+      "title": "Active",
+      "default": true
+    },
+    "assigned_to_all": {
+      "type": "boolean",
+      "title": "Assigned to All Employees",
+      "default": true
+    },
+    "assigned_employee_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Assigned Employee IDs"
+    }
+  },
+  "required": [
+    "title",
+    "category"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.assigned_to_all": true
+        },
+        {
+          "data.assigned_employee_ids": {
+            "$in": [
+              "{{user.data.employee_id}}"
+            ]
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

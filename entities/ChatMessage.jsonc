@@ -1,0 +1,120 @@
+{
+  "name": "ChatMessage",
+  "type": "object",
+  "properties": {
+    "sender_name": {
+      "type": "string",
+      "title": "Sender Name"
+    },
+    "sender_email": {
+      "type": "string",
+      "format": "email",
+      "title": "Sender Email"
+    },
+    "message": {
+      "type": "string",
+      "title": "Message"
+    },
+    "channel": {
+      "type": "string",
+      "enum": [
+        "general",
+        "payroll",
+        "timecards",
+        "benefits",
+        "support"
+      ],
+      "title": "Channel"
+    },
+    "file_url": {
+      "type": "string",
+      "title": "Attachment URL"
+    },
+    "file_type": {
+      "type": "string",
+      "enum": [
+        "image",
+        "document"
+      ],
+      "title": "File Type"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "resolved",
+        "pending"
+      ],
+      "default": "open",
+      "title": "Ticket Status"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "default": "medium",
+      "title": "Priority"
+    },
+    "assigned_to": {
+      "type": "string",
+      "title": "Assigned To (HR Email)"
+    },
+    "response": {
+      "type": "string",
+      "title": "Admin Response"
+    },
+    "resolved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Resolved At"
+    }
+  },
+  "required": [
+    "sender_name",
+    "sender_email",
+    "message",
+    "channel"
+  ],
+  "rls": {
+    "create": true,
+    "read": {
+      "$or": [
+        {
+          "data.sender_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.sender_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.sender_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

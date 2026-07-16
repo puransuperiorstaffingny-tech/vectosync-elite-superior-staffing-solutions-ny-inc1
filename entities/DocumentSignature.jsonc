@@ -1,0 +1,87 @@
+{
+  "name": "DocumentSignature",
+  "type": "object",
+  "properties": {
+    "document_id": {
+      "type": "string",
+      "title": "Document ID"
+    },
+    "document_title": {
+      "type": "string",
+      "title": "Document Title"
+    },
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "employee_email": {
+      "type": "string",
+      "title": "Employee Email"
+    },
+    "signature_text": {
+      "type": "string",
+      "title": "Typed Signature"
+    },
+    "signed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Signed At"
+    },
+    "ip_address": {
+      "type": "string",
+      "title": "IP Address"
+    }
+  },
+  "required": [
+    "document_id",
+    "employee_id",
+    "employee_name"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "data.employee_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "data.employee_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.employee_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

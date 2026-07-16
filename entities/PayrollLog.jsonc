@@ -1,0 +1,99 @@
+{
+  "name": "PayrollLog",
+  "type": "object",
+  "properties": {
+    "payroll_run_id": {
+      "type": "string",
+      "title": "Payroll Run ID"
+    },
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "action": {
+      "type": "string",
+      "enum": [
+        "created",
+        "updated",
+        "approved",
+        "processed",
+        "paid",
+        "reversed"
+      ],
+      "title": "Action"
+    },
+    "log_type": {
+      "type": "string",
+      "enum": [
+        "check",
+        "direct_deposit",
+        "paycard",
+        "payroll_item",
+        "deduction"
+      ],
+      "title": "Log Type"
+    },
+    "amount": {
+      "type": "number",
+      "title": "Amount"
+    },
+    "details": {
+      "type": "string",
+      "title": "Details (JSON)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "completed",
+        "failed",
+        "reversed"
+      ],
+      "title": "Status",
+      "default": "completed"
+    },
+    "period_start": {
+      "type": "string",
+      "format": "date",
+      "title": "Period Start"
+    },
+    "period_end": {
+      "type": "string",
+      "format": "date",
+      "title": "Period End"
+    }
+  },
+  "required": [
+    "payroll_run_id",
+    "employee_id",
+    "employee_name",
+    "action",
+    "log_type"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

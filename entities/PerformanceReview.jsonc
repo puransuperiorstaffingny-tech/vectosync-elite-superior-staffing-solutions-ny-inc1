@@ -1,0 +1,126 @@
+{
+  "name": "PerformanceReview",
+  "type": "object",
+  "properties": {
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "review_cycle": {
+      "type": "string",
+      "title": "Review Cycle (e.g. Q1 2026, Annual 2025)"
+    },
+    "reviewer_email": {
+      "type": "string",
+      "title": "Reviewer Email"
+    },
+    "reviewer_name": {
+      "type": "string",
+      "title": "Reviewer Name"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "submitted",
+        "acknowledged"
+      ],
+      "default": "draft",
+      "title": "Status"
+    },
+    "overall_rating": {
+      "type": "number",
+      "title": "Overall Rating (1\u20135)"
+    },
+    "rating_quality": {
+      "type": "number",
+      "title": "Quality of Work (1\u20135)"
+    },
+    "rating_productivity": {
+      "type": "number",
+      "title": "Productivity (1\u20135)"
+    },
+    "rating_teamwork": {
+      "type": "number",
+      "title": "Teamwork (1\u20135)"
+    },
+    "rating_communication": {
+      "type": "number",
+      "title": "Communication (1\u20135)"
+    },
+    "rating_reliability": {
+      "type": "number",
+      "title": "Reliability & Attendance (1\u20135)"
+    },
+    "strengths": {
+      "type": "string",
+      "title": "Strengths"
+    },
+    "areas_for_improvement": {
+      "type": "string",
+      "title": "Areas for Improvement"
+    },
+    "goals_next_period": {
+      "type": "string",
+      "title": "Goals for Next Period"
+    },
+    "additional_notes": {
+      "type": "string",
+      "title": "Additional Notes (Confidential)"
+    },
+    "review_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Review Date"
+    }
+  },
+  "required": [
+    "employee_id",
+    "employee_name",
+    "review_cycle",
+    "reviewer_email"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.employee_email": "{{user.email}}"
+        },
+        {
+          "data.reviewer_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.reviewer_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "name": "ReceptionQuery",
+  "type": "object",
+  "properties": {
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "employee_email": {
+      "type": "string",
+      "title": "Employee Email"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "payroll",
+        "timecard",
+        "benefits",
+        "scheduling",
+        "document",
+        "general",
+        "other"
+      ],
+      "default": "general",
+      "title": "Category"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "normal",
+        "high",
+        "urgent"
+      ],
+      "default": "normal",
+      "title": "Priority"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "pending",
+        "resolved"
+      ],
+      "default": "new",
+      "title": "Status"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "assigned_to": {
+      "type": "string",
+      "title": "Assigned To (Agent Email)"
+    },
+    "assigned_to_name": {
+      "type": "string",
+      "title": "Assigned To (Agent Name)"
+    },
+    "notes": {
+      "type": "array",
+      "title": "Agent Notes",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "resolved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Resolved At"
+    },
+    "resolved_by": {
+      "type": "string",
+      "title": "Resolved By"
+    }
+  },
+  "required": [
+    "subject"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
